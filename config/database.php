@@ -84,6 +84,17 @@ class DATABASE_CONFIG {
 		'encoding' => 'utf8',
 	);
 
+	var $remote = array(
+		'driver' => 'mysql',
+		'persistent' => false,
+		'host' => 'localhost',
+		'login' => 'brownie_demo',
+		'password' => 'brownie_demo',
+		'database' => 'brownie_demo',
+		'prefix' => '',
+		'encoding' => 'utf8',
+	);
+
 	var $test = array(
 		'driver' => 'mysql',
 		'persistent' => false,
@@ -93,4 +104,11 @@ class DATABASE_CONFIG {
 		'database' => 'test_database_name',
 		'prefix' => '',
 	);
+
+	function __construct() {
+		if (!Configure::read('isLocal')) {
+			$this->default = $this->remote;
+		}
+	}
+
 }
