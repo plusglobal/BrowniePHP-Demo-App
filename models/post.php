@@ -4,6 +4,7 @@ class Post extends AppModel {
 
 	var $belongsTo = array('Category', 'PostStatus');
 	var $hasAndBelongsToMany = array('Tag');
+	var $order = array('date' => 'desc');
 
 	var $brwConfig = array(
 		'images' => array(
