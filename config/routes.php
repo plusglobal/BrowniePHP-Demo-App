@@ -31,3 +31,10 @@
  * ...and connect the rest of 'Pages' controller's urls.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+
+
+/**
+ * routes to connect example.com/admin with the brownie plugin
+ */
+	Router::connect('/admin', array('plugin' => 'brownie', 'controller' => 'brownie', 'action' => 'login'));
+	Router::connect('/admin/:controller/:action/*', array('plugin' => 'brownie'));
