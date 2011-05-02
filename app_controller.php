@@ -33,7 +33,7 @@ class AppController extends Controller {
 		),
 		'Configuration' => array(
 			//'Button label' => 'ModelName',
-			'Cateogories' => 'Category',
+			'Categories' => 'Category',
 			'Tags' => 'Tag'
 		),
 	);
