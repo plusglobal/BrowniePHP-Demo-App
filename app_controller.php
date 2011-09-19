@@ -2,7 +2,7 @@
 
 class AppController extends Controller {
 
-	var $components = array('Session', 'Brownie.panel');
+	var $components = array('Session', 'Brownie.panel', 'DebugKit.Toolbar');
 
 	var $companyName = 'Demo app';
 
