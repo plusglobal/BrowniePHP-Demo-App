@@ -23,19 +23,37 @@ class AppController extends Controller {
 		'Posts' => array(
 			//'Button Label' => array()
 			'Published' => array(
-				'plugin' => 'brownie', 'controller' => 'contents',
-				'action' => 'view', 'PostStatus', '2',
+				'plugin' => 'brownie', 'controller' => 'contents', 'brw' => false,
+				'action' => 'index', 'Post', 'Post.post_status_id' => PUBLISHED,
 			),
 			'Draft' => array(
-				'plugin' => 'brownie', 'controller' => 'contents',
-				'action' => 'view', 'PostStatus', '1',
+				'plugin' => 'brownie', 'controller' => 'contents', 'brw' => false,
+				'action' => 'index', 'Post', 'Post.post_status_id' => DRAFT,
+
 			),
 		),
 		'Configuration' => array(
 			//'Button label' => 'ModelName',
 			'Categories' => 'Category',
-			'Tags' => 'Tag'
+			'Tags' => 'Tag',
+			'Authors' => 'Author',
 		),
 	);
+
+	//you can configure a different menu for each type of user
+	var $brwMenuPerAuthUser = array(
+		'Author' => array('a' => 'b'),
+	);
+
+	//or you can modify the main menu based on your user type
+	function beforeRender() {
+		$authModel = Configure::read('brwSettings.authModel');
+		if ($authModel == 'Author') {
+			$brwMenu = $this->brwMenu;
+			unset($brwMenu['Configuration']['Authors']);
+			$this->brwMenuPerAuthUser['Author'] = $brwMenu;
+		}
+		parent::beforeRender();
+	}
 
 }

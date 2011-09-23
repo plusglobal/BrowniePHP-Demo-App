@@ -48,3 +48,6 @@
  * Inflector::rules('plural', array('rules' => array(), 'irregular' => array(), 'uninflected' => array()));
  *
  */
+
+define('DRAFT', 1);
+define('PUBLISHED', 2);

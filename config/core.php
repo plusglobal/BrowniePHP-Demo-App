@@ -42,7 +42,7 @@ $isLocal = (
 Configure::write('isLocal', $isLocal);
 
 if ($isLocal) {
-	Configure::write('debug', 1);
+	Configure::write('debug', 2);
 } else {
 	Configure::write('debug', 0);
 }
@@ -315,3 +315,13 @@ if ($isLocal) {
 	Cache::config('default', array('engine' => 'File'));
 
 	Configure::write('Config.language', 'en');
+
+	Configure::write('brwSettings', array(
+		'dateFormat' => 'M.d.Y',
+		'datetimeFormat' => 'M.d.Y h:i',
+		'userModels' => array('Author'),
+		'customHome' => array(
+			'controller' => 'contents', 'action' => 'index',
+			'Post', 'plugin' => 'brownie', 'brw' => false,
+		),
+	));

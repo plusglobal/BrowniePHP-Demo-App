@@ -2,11 +2,17 @@
 
 class Post extends AppModel {
 
-	var $belongsTo = array('Category', 'PostStatus');
+	var $belongsTo = array(
+		'Author', 'Category',
+		'PostStatus'
+	);
 	var $hasAndBelongsToMany = array('Tag');
 	var $order = array('date' => 'desc');
 
 	var $brwConfig = array(
+		'fields' => array(
+			'filter' => array('post_status_id', 'category_id', 'author_id'),
+		),
 		'images' => array(
 			'main' => array(
 				'name_category' => 'Main image',
@@ -20,6 +26,13 @@ class Post extends AppModel {
 				'index' => false,
 				'description' => true,
 			),
+		),
+	);
+
+	var $brwConfigPerAuthUser = array(
+		'Author' => array(
+			'type' => 'owned', // may be 'owned', 'all', 'none'
+			'brwConfig' => array(),
 		),
 	);
 
