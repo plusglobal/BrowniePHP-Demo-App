@@ -63,8 +63,8 @@ Cache::config('default', array('engine' => 'File'));
  * CakePlugin::load('DebugKit'); //Loads a single plugin named DebugKit
  *
  */
-
 define('DRAFT', 1);
 define('PUBLISHED', 2);
 
-CakePlugin::loadAll();
+CakePlugin::load('DebugKit');
+CakePlugin::load('Brownie', array('bootstrap' => true, 'routes' => true));
