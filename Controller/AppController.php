@@ -4,11 +4,9 @@ class AppController extends Controller {
 
 	public $components = array(
 		'Session',
-		'Brownie.panel',
+		'Brownie.BrwPanel',
 		'DebugKit.Toolbar',
 	);
-
-	public $companyName = 'Demo app';
 
 	/**
 	* The menu should have the following structure:
@@ -25,6 +23,8 @@ class AppController extends Controller {
 	*/
 	public $brwMenu = array(
 		'Posts' => array(
+			//'Button label' => 'ModelName',
+			'All' => 'Post',
 			//'Button Label' => array()
 			'Published' => array(
 				'plugin' => 'brownie', 'controller' => 'contents', 'brw' => false,
@@ -36,8 +36,10 @@ class AppController extends Controller {
 
 			),
 		),
+		'Pages' => array(
+			'Pages' => 'Page',
+		),
 		'Configuration' => array(
-			//'Button label' => 'ModelName',
 			'Categories' => 'Category',
 			'Tags' => 'Tag',
 			'Authors' => 'Author',
@@ -45,19 +47,24 @@ class AppController extends Controller {
 	);
 
 	//you can configure a different menu for each type of user
-	public $brwMenuPerAuthUser = array(
-		'Author' => array('a' => 'b'),
-	);
+	/*public $brwMenuPerAuthUser = array(
+		'Author' => array(
+			'Menu' => array(
+				'Button name' => 'ModelName'
+			),
+		),
+	);*/
 
-	//or you can modify the main menu based on your user type
-	function beforeRender() {
-		$authModel = Configure::read('brwSettings.authModel');
-		if ($authModel == 'Author') {
+	//or you can override the main menu based on your user type
+	function beforeFilter() {
+		if ($this->request['params']['plugin'] == 'Brownie' and AuthComponent::user('model') == 'Author') {
 			$brwMenu = $this->brwMenu;
+			pr($brwMenu);
 			unset($brwMenu['Configuration']['Authors']);
-			$this->brwMenuPerAuthUser['Author'] = $brwMenu;
+			$this->brwMenuPerAuthUser = array('Author' => $brwMenu);
+			pr($this->brwMenuPerAuthUser);
 		}
-		parent::beforeRender();
+		parent::beforeFilter();
 	}
 
 }
