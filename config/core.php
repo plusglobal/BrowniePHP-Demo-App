@@ -341,3 +341,14 @@ Cache::config('_cake_model_', array(
 	'serialize' => ($engine === 'File'),
 	'duration' => $duration
 ));
+
+Configure::write('Config.language', 'en');
+Configure::write('Config.languages', array('en', 'es'));
+
+//here you can override the default brownie config
+Configure::write('brwSettings', array(
+	'dateFormat' => 'M.d.Y',
+	'datetimeFormat' => 'M.d.Y h:i a',
+	'userModels' => array('Author', 'BrwUser'),
+	'companyName' => 'Demo app',
+));
