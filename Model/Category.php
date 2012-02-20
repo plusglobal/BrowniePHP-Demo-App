@@ -2,10 +2,18 @@
 
 class Category extends AppModel {
 
-	var $hasMany = array('Post');
+	public $hasMany = array('Post');
+	public $actsAs = array('Tree');
 
+	public $brwConfig = array(
+		'fields' => array(
+			'no_add' => array('post_count'),
+			'no_edit' => array('post_count'),
+			'filter' => array('post_count'),
+		),
+	);
 
-	var $brwConfigPerAuthUser = array(
+	public $brwConfigPerAuthUser = array(
 		'Author' => array(
 			'type' => 'all', // may be 'owned', 'all', 'none'
 			'brwConfig' => array(
@@ -15,5 +23,6 @@ class Category extends AppModel {
 			),
 		),
 	);
+
 
 }
