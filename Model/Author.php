@@ -2,7 +2,7 @@
 
 class Author extends AppModel {
 
-	var $hasMany = array('Post');
+	var $hasMany = array('Post', 'Page');
 
 	var $brwConfig = array(
 		'fields' => array(
