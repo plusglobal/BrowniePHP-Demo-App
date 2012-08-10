@@ -15,7 +15,7 @@ class Category extends AppModel {
 
 	public $brwConfigPerAuthUser = array(
 		'Author' => array(
-			'type' => 'all', // may be 'owned', 'all', 'none'
+			'type' => 'all', // may be 'owned', 'all', 'none', 'custom'
 			'brwConfig' => array(
 				'actions' => array(
 					'add' => false, 'edit' => false, 'delete' => false,

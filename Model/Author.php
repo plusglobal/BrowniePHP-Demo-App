@@ -6,7 +6,7 @@ class Author extends AppModel {
 
 	var $brwConfig = array(
 		'fields' => array(
-			'filter' => array('email', 'id_number' => true),
+			'filter' => array('email', 'id' => true),
 		),
 	);
 
