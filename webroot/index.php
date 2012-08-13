@@ -7,12 +7,12 @@
  * PHP 5
  *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          http://cakephp.org CakePHP(tm) Project
  * @package       app.webroot
  * @since         CakePHP(tm) v 0.2.9
@@ -49,7 +49,7 @@
  * The absolute path to the "cake" directory, WITHOUT a trailing DS.
  *
  * Un-comment this line to specify a fixed path to CakePHP.
- * This should point at the directory containg `Cake`.
+ * This should point at the directory containing `Cake`.
  *
  * For ease of development CakePHP uses PHP's include_path.  If you
  * cannot modify your include_path set this value.
@@ -84,10 +84,6 @@
 	}
 	if (!empty($failed)) {
 		trigger_error("CakePHP core could not be found.  Check the value of CAKE_CORE_INCLUDE_PATH in APP/webroot/index.php.  It should point to the directory containing your " . DS . "cake core directory and your " . DS . "vendors root directory.", E_USER_ERROR);
-	}
-
-	if (isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] == '/favicon.ico') {
-		return;
 	}
 
 	App::uses('Dispatcher', 'Routing');
