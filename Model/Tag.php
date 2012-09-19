@@ -2,6 +2,12 @@
 
 class Tag extends AppModel {
 
-	var $hasAndBelongsToMany = array('Post');
+	public $hasAndBelongsToMany = array('Post');
+
+	public $brwConfig = array(
+		'fields' => array(
+			'filter' => array('id' => true, 'name'),
+		),
+	);
 
 }
