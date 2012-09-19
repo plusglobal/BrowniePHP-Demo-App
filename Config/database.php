@@ -7,12 +7,12 @@
  * PHP 5
  *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          http://cakephp.org CakePHP(tm) Project
  * @package       app.Config
  * @since         CakePHP(tm) v 0.2.9
@@ -27,14 +27,14 @@
  * Database configuration class.
  * You can specify multiple configurations for production, development and testing.
  *
- * driver => The name of a supported driver; valid options are as follows:
+ * datasource => The name of a supported datasource; valid options are as follows:
  *		Database/Mysql 		- MySQL 4 & 5,
  *		Database/Sqlite		- SQLite (PHP5 only),
  *		Database/Postgres	- PostgreSQL 7 and higher,
  *		Database/Sqlserver	- Microsoft SQL Server 2005 and higher
  *
- * You can add custom database drivers (or override existing drivers) by adding the
- * appropriate file to app/Model/Datasource/Database.  Drivers should be named 'MyDriver.php',
+ * You can add custom database datasources (or override existing datasources) by adding the
+ * appropriate file to app/Model/Datasource/Database.  Datasources should be named 'MyDatasource.php',
  *
  *
  * persistent => true / false
@@ -81,6 +81,7 @@ class DATABASE_CONFIG {
 		'encoding' => 'utf8',
 	);
 
+
 	public $remote = array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
@@ -91,6 +92,7 @@ class DATABASE_CONFIG {
 		'prefix' => '',
 		'encoding' => 'utf8',
 	);
+
 
 	function __construct() {
 		if (!Configure::read('isLocal')) {
