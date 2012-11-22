@@ -43,6 +43,8 @@ class AppController extends Controller {
 			'Categories' => 'Category',
 			'Tags' => 'Tag',
 			'Authors' => 'Author',
+			'Countries' => 'Country',
+			'Cities' => 'City',
 		),
 	);
 

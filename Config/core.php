@@ -21,7 +21,7 @@
 
 //detecting the enviroment
 $isLocal = (
-	env('REMOTE_ADDR') == '127.0.0.1'
+	in_array(env('REMOTE_ADDR'), array('127.0.0.1', '::1'))
 	or substr(env('HTTP_HOST'), -4) == '.dev'
 	or class_exists('ShellDispatcher')
 );

@@ -3,6 +3,7 @@
 class Category extends AppModel {
 
 	public $hasMany = array('Post');
+
 	public $actsAs = array('Tree');
 
 	public $brwConfig = array(
