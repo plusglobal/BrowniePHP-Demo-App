@@ -17,6 +17,10 @@
  * @since         DebugKit 0.1
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  **/
+
+$this->Number = $this->Helpers->load('Number');
+$this->SimpleGraph = $this->Helpers->load('DebugKit.SimpleGraph');
+
 if (!isset($debugKitInHistoryMode)):
 	$timers = DebugTimer::getAll(true);
 	$currentMemory = DebugKitDebugger::getMemoryUse();
@@ -76,7 +80,7 @@ foreach ($timers as $timerName => $timeInfo):
 			$indent++;
 		}
 	}
-	$indent = str_repeat(' » ', $indent);
+	$indent = str_repeat(' &raquo; ', $indent);
 	$rows[] = array(
 		$indent . $timeInfo['message'],
 		$this->Number->precision($timeInfo['time'] * 1000, 2),

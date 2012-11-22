@@ -38,13 +38,12 @@
 				echo $this->Toolbar->panelStart($title, $panelUnderscore);
 			?>
 				<div class="panel-content" id="<?php echo $panelUnderscore ?>-tab">
-					<a href="#" class="panel-maximize ui-control ui-button">+</a>
-					<a href="#" class="panel-minimize ui-control ui-button">–</a>
+					<a href="#" class="panel-toggle ui-control ui-button">+</a>
 					<div class="panel-resize-region">
 						<div class="panel-content-data">
 							<?php
 								echo $this->element($panelInfo['elementName'], $panelInfo, array(
-									'plugin' => Inflector::camelize($panelInfo['plugin'])
+									'plugin' => (empty($panelInfo['plugin'])) ? null : Inflector::camelize($panelInfo['plugin'])
 								)); 
 							?>
 						</div>

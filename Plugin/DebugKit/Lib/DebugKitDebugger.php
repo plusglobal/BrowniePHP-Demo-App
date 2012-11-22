@@ -31,6 +31,7 @@ App::uses('DebugMemory', 'DebugKit.Lib');
  * This file will not be needed in future version of CakePHP.
  */
 class DebugKitDebugger extends Debugger {
+
 /**
  * destruct method
  *
@@ -57,7 +58,7 @@ class DebugKitDebugger extends Debugger {
 					$indent++;
 				}
 			}
-			$indent = str_repeat(' » ', $indent);
+			$indent = str_repeat(' &raquo; ', $indent);
 
 			extract($timer);
 			$start = round($start * 1000, 0);
@@ -209,7 +210,7 @@ class DebugKitDebugger extends Debugger {
  * @param array $links  Links for the error
  * @return void
  */
-	public function fireError($data, $links) {
+	public static function fireError($data, $links) {
 		$name = $data['error'] . ' - ' . $data['description'];
 		$message = "{$data['error']} {$data['code']} {$data['description']} on line: {$data['line']} in file: {$data['file']}";
 		FireCake::group($name);
@@ -222,6 +223,7 @@ class DebugKitDebugger extends Debugger {
 		}
 		FireCake::groupEnd();
 	}
+
 }
 
 

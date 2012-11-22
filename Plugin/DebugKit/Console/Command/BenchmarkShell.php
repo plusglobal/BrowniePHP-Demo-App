@@ -30,7 +30,10 @@
  * @todo Export/graphing of data to .dot format for graphviz visualization
  * @todo Make calculated results round to leading significant digit position of std dev.
  */
+App::uses('String','Utility');
+
 class BenchmarkShell extends Shell {
+
 /**
  * Main execution of shell
  *
@@ -43,7 +46,7 @@ class BenchmarkShell extends Shell {
 
 		$url = $this->args[0];
 		$defaults = array('t' => 100, 'n' => 10);
-		$options  = array_merge($defaults, $this->request->params);
+		$options  = array_merge($defaults, $this->params);
 		$times = array();
 
 		$this->out(String::insert(__d('debug_kit', '-> Testing :url'), compact('url')));
@@ -94,8 +97,8 @@ class BenchmarkShell extends Shell {
 		)));
 
 		$this->out("");
-
 	}
+
 /**
  * One-pass, numerically stable calculation of population variance.
  *
@@ -111,16 +114,16 @@ class BenchmarkShell extends Shell {
 	protected function _variance($times, $sample = true) {
 		$n = $mean = $M2 = 0;
 
-		foreach($times as $time){
+		foreach ($times as $time) {
 			$n += 1;
 			$delta = $time - $mean;
-			$mean = $mean + $delta/$n;
-			$M2 = $M2 + $delta*($time - $mean);
+			$mean = $mean + $delta / $n;
+			$M2 = $M2 + $delta * ($time - $mean);
 		}
 
 		if ($sample) $n -= 1;
 
-		return $M2/$n;
+		return $M2 / $n;
 	}
 /**
  * Calculate the standard deviation.
