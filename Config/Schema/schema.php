@@ -32,6 +32,7 @@ class AppSchema extends CakeSchema {
 		'password' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 250, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
 		'city_id' => array('type' => 'integer', 'null' => true, 'default' => null),
 		'last_login' => array('type' => 'datetime', 'null' => false, 'default' => null),
+		'facebook_id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 20, 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
 		'indexes' => array(
 			'PRIMARY' => array('column' => 'id', 'unique' => 1)
 		),
@@ -291,15 +292,14 @@ class AppSchema extends CakeSchema {
 
 	public function createPosts() {
 		$Post = ClassRegistry::init('Post');
-		$countCategories = $Post->Category->find('count');
 		for ($id = 1; $id < 100; $id++) {
 			$Post->save(array(
 				'id' => $id,
 				'title' => $this->getRandomString(2, 6),
 				'date' => $this->getRandomDate(),
-				'post_status_id' => rand(1, 2),
-				'author_id' => rand(1, 10),
-				'category_id' => rand(1, $countCategories),
+				'post_status_id' => rand(1, $Post->PostStatus->find('count')),
+				'author_id' => rand(1, $Post->Author->find('count')),
+				'category_id' => rand(1, $Post->Category->find('count')),
 				'body' => $this->getRandomHtmlText(10, 100),
 			));
 		}
