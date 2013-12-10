@@ -19,6 +19,12 @@ class Post extends AppModel {
 			'filter_advanced' => array(
 				'date',
 			),
+			'date_ranges' => array(
+				'date' => array(
+					'maxYear' => '+10 years',
+					'minYear' => '2010',
+				),
+			),
 		),
 		'images' => array(
 			'main' => array(
