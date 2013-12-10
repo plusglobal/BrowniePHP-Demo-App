@@ -293,6 +293,7 @@ Configure::write('Config.languages', array('en', 'es'));
 //here you can override the default brownie config
 Configure::write('brwSettings', array(
 	'dateFormat' => 'M.d.Y',
+	'formDateFormat' => 'DMY',
 	'datetimeFormat' => 'M.d.Y h:i a',
 	'userModels' => array('Author', 'BrwUser'),
 	'companyName' => 'Demo app',
