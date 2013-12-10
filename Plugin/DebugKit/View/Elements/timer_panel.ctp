@@ -2,20 +2,18 @@
 /**
  * Timer Panel Element
  *
- * PHP versions 5
+ * PHP 5
  *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org
- * @package       debug_kit
- * @subpackage    debug_kit.views.elements
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @since         DebugKit 0.1
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  **/
 
 $this->Number = $this->Helpers->load('Number');
@@ -45,7 +43,7 @@ endif;
 	$memoryPoints = DebugKitDebugger::getMemoryPoints();
 
 	$rows = array();
-	foreach($memoryPoints as $key => $value):
+	foreach ($memoryPoints as $key => $value):
 		$rows[] = array($key, $this->Number->toReadableSize($value));
 	endforeach;
 
@@ -96,7 +94,7 @@ foreach ($timers as $timerName => $timeInfo):
 	$i++;
 endforeach;
 
-if (strtolower($this->Toolbar->getName()) == 'firephptoolbar'):
+if (strtolower($this->Toolbar->getName()) === 'firephptoolbar'):
 	for ($i = 0, $len = count($rows); $i < $len; $i++):
 		unset($rows[$i][2]);
 	endfor;

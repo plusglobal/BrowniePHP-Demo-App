@@ -1,22 +1,19 @@
 <?php
 /**
- * DebugToolbar Test
- *
- * PHP versions 5
+ * PHP 5
  *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org
- * @package       debug_kit
- * @subpackage    debug_kit.tests.controllers.components
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @since         DebugKit 2.1
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 App::uses('Router', 'Routing');
 App::uses('Controller', 'Controller');
 App::uses('AppController', 'Controller');
@@ -25,22 +22,32 @@ App::uses('ToolbarComponent', 'DebugKit.Controller/Component');
 App::uses('DebugMemory', 'DebugKit.Lib');
 App::uses('DebugTimer', 'DebugKit.Lib');
 
+/**
+ * Class TestToolbarComponent
+ *
+ * @since         DebugKit 2.1
+ */
 class TestToolbarComponent extends ToolbarComponent {
 
+	/**
+	 * Load Panels of Toolbar
+	 *
+	 * @param $panels
+	 * @param array $settings
+	 */
 	public function loadPanels($panels, $settings = array()) {
 		$this->_loadPanels($panels, $settings);
 	}
-
 }
 
-
 /**
- * DebugKitToolbarComponentTestCase Test case
+ * ToolbarComponentTestCase Test case
+ *
  */
-class DebugKitToolbarComponentTestCase extends CakeTestCase {
+class ToolbarComponentTestCase extends CakeTestCase {
 
 /**
- * fixtures.
+ * fixtures
  *
  * @var array
  */
@@ -80,10 +87,11 @@ class DebugKitToolbarComponentTestCase extends CakeTestCase {
  * @return void
  */
 	public function tearDown() {
-		parent::tearDown();
-
 		$_SERVER = $this->_server;
 		$_GET = $this->_get;
+
+		parent::tearDown();
+
 		App::build(array(
 			'plugins' => $this->_paths['plugins'],
 			'views' => $this->_paths['views'],
@@ -102,9 +110,11 @@ class DebugKitToolbarComponentTestCase extends CakeTestCase {
 		}
 		Router::reload();
 	}
+
 /**
  * loading test controller
  *
+ * @param array $settings
  * @return Controller
  */
 	protected function _loadController($settings = array()) {
@@ -165,7 +175,7 @@ class DebugKitToolbarComponentTestCase extends CakeTestCase {
 		$this->Controller->Toolbar->loadPanels(array('DebugkitTestPlugin.PluginTest'));
 		$this->assertInstanceOf(
 			'PluginTestPanel',
-			$this->Controller->Toolbar->panels['plugintest']
+			$this->Controller->Toolbar->panels['plugin_test']
 		);
 	}
 
@@ -227,7 +237,7 @@ class DebugKitToolbarComponentTestCase extends CakeTestCase {
 		));
 
 		$expected = array(
-			'history', 'session', 'request', 'sqllog', 'timer',
+			'history', 'session', 'request', 'sql_log', 'timer',
 			'log', 'variables', 'environment', 'include', 'test'
 		);
 		$this->assertEquals($expected, array_keys($this->Controller->Toolbar->panels));
@@ -246,7 +256,7 @@ class DebugKitToolbarComponentTestCase extends CakeTestCase {
 			)
 		));
 
-		$expected = array('request', 'sqllog', 'timer', 'log', 'variables', 'environment', 'include');
+		$expected = array('request', 'sql_log', 'timer', 'log', 'variables', 'environment', 'include');
 		$this->assertEquals($expected, array_keys($this->Controller->Toolbar->panels));
 	}
 
@@ -511,5 +521,4 @@ class DebugKitToolbarComponentTestCase extends CakeTestCase {
 		$result = $this->Controller->requestAction('/debug_kit_test/request_action_render', array('return'));
 		$this->assertEquals($result, 'I have been rendered.');
 	}
-
 }

@@ -1,30 +1,25 @@
 <?php
-App::uses('File', 'Utility');
-
 /**
- * Tidy helper - passes html through tidy on the command line, and reports markup errors
- *
- * PHP version 4 and 5
- *
- * Copyright (c) 2009, Andy Dawson
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) 2009, Andy Dawson
- * @link          www.ad7six.com
- * @package       debug_kit
- * @subpackage    debug_kit.views.helpers
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @since         v 1.0 (22-Jun-2009)
- * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
+App::uses('File', 'Utility');
 
 /**
  * TidyHelper class
  *
+ * Passes html through tidy on the command line, and reports markup errors
+ *
  * @uses          AppHelper
- * @package       debug_kit
- * @subpackage    debug_kit.views.helpers
+ * @since         v 1.0 (22-Jun-2009)
  */
 class TidyHelper extends AppHelper {
 
@@ -32,7 +27,6 @@ class TidyHelper extends AppHelper {
  * helpers property
  *
  * @var array
- * @access public
  */
 	public $helpers = array('DebugKit.Toolbar');
 
@@ -40,7 +34,6 @@ class TidyHelper extends AppHelper {
  * results property
  *
  * @var mixed null
- * @access public
  */
 	public $results = null;
 
@@ -51,13 +44,12 @@ class TidyHelper extends AppHelper {
  * @param string $html ''
  * @param string $out ''
  * @return array
- * @access public
  */
 	public function process($html = '', &$out = '') {
 		$errors = $this->tidyErrors($html, $out);
 
 		if (!$errors) {
-			return;
+			return array();
 		}
 		$result = array('Error' => array(), 'Warning' => array(), 'Misc' => array());
 		$errors = explode("\n", $errors);
@@ -96,7 +88,6 @@ class TidyHelper extends AppHelper {
  *
  * @param mixed $html null
  * @return string
- * @access public
  */
 	public function report($html = null) {
 		if ($html) {
@@ -124,7 +115,6 @@ class TidyHelper extends AppHelper {
  * @param string $in ''
  * @param string $out ''
  * @return string
- * @access public
  */
 	public function tidyErrors($in = '', &$out = '') {
 		$out = preg_replace('@>\s*<@s', ">\n<", $in);
@@ -146,7 +136,7 @@ class TidyHelper extends AppHelper {
 		$File->delete();
 
 		if (!file_exists($errors)) {
-			return;
+			return '';
 		}
 		$Error = new File($errors);
 		$errors = $Error->read();
@@ -159,8 +149,7 @@ class TidyHelper extends AppHelper {
  *
  * @param mixed $cmd
  * @param mixed $out null
- * @return void
- * @access protected
+ * @return boolean True if successful
  */
 	protected function _exec($cmd, &$out = null) {
 		if (DS === '/') {
@@ -179,5 +168,4 @@ class TidyHelper extends AppHelper {
 		}
 		return $_out ? $_out : true;
 	}
-
 }

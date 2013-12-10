@@ -1,17 +1,32 @@
 <?php
-App::uses('DebugPanel', 'DebugKit.Lib');
-
 /**
  * Log Panel - Reads log entries made this request.
  *
- * @package       cake.debug_kit.panels
+ * PHP 5
+ *
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+
+App::uses('DebugPanel', 'DebugKit.Lib');
+
+/**
+ * Class LogPanel
+ *
  */
 class LogPanel extends DebugPanel {
 
 /**
  * Constructor - sets up the log listener.
  *
- * @return void
+ * @return \LogPanel
  */
 	public function __construct() {
 		parent::__construct();
@@ -22,7 +37,7 @@ class LogPanel extends DebugPanel {
 			));
 		}
 		CakeLog::config('debug_kit_log_panel', array(
-			'engine' => 'DebugKit.DebugKitLogListener',
+			'engine' => 'DebugKit.DebugKitLog',
 			'panel' => $this
 		));
 	}
@@ -30,11 +45,11 @@ class LogPanel extends DebugPanel {
 /**
  * beforeRender Callback
  *
+ * @param Controller $controller
  * @return array
  */
 	public function beforeRender(Controller $controller) {
 		$logger = $this->logger;
 		return $logger;
 	}
-
 }

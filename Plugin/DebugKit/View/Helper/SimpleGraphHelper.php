@@ -1,27 +1,27 @@
 <?php
 /**
- * Simple Graph Helper
- *
- * Allows creation and display of extremely simple graphing elements
- *
- * PHP versions 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org
- * @package       debug_kit
- * @subpackage    debug_kit.views.helpers
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @since         DebugKit 1.0
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
- **/
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+
 App::uses('AppHelper', 'View/Helper');
 App::uses('HtmlHelper', 'View/Helper');
 
+/**
+ * Class SimpleGraphHelper
+ *
+ * Allows creation and display of extremely simple graphing elements
+ *
+ * @since         DebugKit 1.0
+ */
 class SimpleGraphHelper extends AppHelper {
 
 /**
@@ -54,7 +54,7 @@ class SimpleGraphHelper extends AppHelper {
  *
  * @param $value Value to be graphed
  * @param $offset how much indentation
- * @param $options Graph options
+ * @param array|\Graph $options Graph options
  * @return string Html graph
  */
 	public function bar($value, $offset, $options = array()) {
@@ -64,7 +64,7 @@ class SimpleGraphHelper extends AppHelper {
 		$graphValue = ($value / $max) * $width;
 		$graphValue = max(round($graphValue), 1);
 
-		if ($valueType == 'percentage') {
+		if ($valueType === 'percentage') {
 			$graphOffset = 0;
 		} else {
 			$graphOffset = ($offset / $max) * $width;
@@ -84,4 +84,5 @@ class SimpleGraphHelper extends AppHelper {
 			false
 		);
 	}
+
 }

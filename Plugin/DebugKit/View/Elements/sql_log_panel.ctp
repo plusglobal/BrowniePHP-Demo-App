@@ -2,21 +2,20 @@
 /**
  * SQL Log Panel Element
  *
- * PHP versions 5
+ * PHP 5
  *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org
- * @package       debug_kit
- * @subpackage    debug_kit.views.elements
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @since         DebugKit 0.1
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 $headers = array('Query', 'Affected', 'Num. rows', 'Took (ms)', 'Actions');
 if (isset($debugKitInHistoryMode)) {
 	$content = $this->Toolbar->readCache('sql_log', $this->request->params['pass'][0]);
@@ -44,7 +43,7 @@ if (isset($debugKitInHistoryMode)) {
 			);
 			echo '</h5>';
 			echo $this->Toolbar->table($queryLog['queries'], $headers, array('title' => 'SQL Log ' . $dbName));
-		 ?>
+			?>
 		<h4><?php echo __d('debug_kit', 'Query Explain:'); ?></h4>
 		<div id="sql-log-explain-<?php echo $dbName ?>">
 			<a id="debug-kit-explain-<?php echo $dbName ?>"> </a>
@@ -54,4 +53,4 @@ if (isset($debugKitInHistoryMode)) {
 	<?php endforeach; ?>
 <?php else:
 	echo $this->Toolbar->message('Warning', __d('debug_kit', 'No active database connections'));
-endif; ?>
+endif;

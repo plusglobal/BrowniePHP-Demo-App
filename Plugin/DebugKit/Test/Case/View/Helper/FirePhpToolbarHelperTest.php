@@ -2,21 +2,20 @@
 /**
  * Toolbar Abstract Helper Test Case
  *
- * PHP versions 5
+ * PHP 5
  *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org
- * @package       debug_kit
- * @subpackage    debug_kit.tests.views.helpers
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @since         DebugKit 0.1
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  **/
+
 $path = CakePlugin::path('DebugKit');
 
 App::uses('View', 'View');
@@ -25,10 +24,14 @@ App::uses('CakeResponse', 'Network');
 App::uses('Router', 'Routing');
 App::uses('ToolbarHelper', 'DebugKit.View/Helper');
 App::uses('FirePhpToolbarHelper', 'DebugKit.View/Helper');
+
 require_once $path . 'Test' . DS . 'Case' . DS . 'TestFireCake.php';
 
-FireCake::getInstance('TestFireCake');
-
+/**
+ * Class FirePhpToolbarHelperTestCase
+ *
+ * @since         DebugKit 0.1
+ */
 class FirePhpToolbarHelperTestCase extends CakeTestCase {
 
 /**
@@ -48,10 +51,12 @@ class FirePhpToolbarHelperTestCase extends CakeTestCase {
 		$this->Toolbar = new ToolbarHelper($this->View, array('output' => 'DebugKit.FirePhpToolbar'));
 		$this->Toolbar->FirePhpToolbar = new FirePhpToolbarHelper($this->View);
 
-		$this->firecake = FireCake::getInstance();
+		$this->firecake = FireCake::getInstance('TestFireCake');
+		TestFireCake::reset();
 	}
+
 /**
- * start test - switch view paths
+ * Start test - switch view paths
  *
  * @return void
  **/
@@ -65,7 +70,7 @@ class FirePhpToolbarHelperTestCase extends CakeTestCase {
 	}
 
 /**
- * endTest()
+ * End Test
  *
  * @return void
  */
@@ -74,19 +79,18 @@ class FirePhpToolbarHelperTestCase extends CakeTestCase {
 	}
 
 /**
- * tearDown
+ * TearDown
  *
  * @return void
  */
 	public function tearDown() {
+		parent::tearDown();
 		unset($this->Toolbar, $this->Controller);
-		ClassRegistry::flush();
-		Router::reload();
 		TestFireCake::reset();
 	}
 
 /**
- * test neat array (dump)creation
+ * Test neat array (dump)creation
  *
  * @return void
  */
@@ -94,10 +98,11 @@ class FirePhpToolbarHelperTestCase extends CakeTestCase {
 		$this->Toolbar->makeNeatArray(array(1,2,3));
 		$result = $this->firecake->sentHeaders;
 		$this->assertTrue(isset($result['X-Wf-1-1-1-1']));
-		$this->assertPattern('/\[1,2,3\]/', $result['X-Wf-1-1-1-1']);
+		$this->assertRegexp('/\[1,2,3\]/', $result['X-Wf-1-1-1-1']);
 	}
+
 /**
- * testAfterlayout element rendering
+ * Test afterlayout element rendering
  *
  * @return void
  */
@@ -122,6 +127,7 @@ class FirePhpToolbarHelperTestCase extends CakeTestCase {
 		$result = $this->firecake->sentHeaders;
 		$this->assertTrue(is_array($result));
 	}
+
 /**
  * test starting a panel
  *
@@ -132,6 +138,7 @@ class FirePhpToolbarHelperTestCase extends CakeTestCase {
 		$result = $this->firecake->sentHeaders;
 		$this->assertPattern('/GROUP_START.+My Panel/', $result['X-Wf-1-1-1-1']);
 	}
+
 /**
  * test ending a panel
  *
@@ -142,5 +149,4 @@ class FirePhpToolbarHelperTestCase extends CakeTestCase {
 		$result = $this->firecake->sentHeaders;
 		$this->assertPattern('/GROUP_END/', $result['X-Wf-1-1-1-1']);
 	}
-
 }

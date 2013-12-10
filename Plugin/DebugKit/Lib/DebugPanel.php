@@ -4,16 +4,24 @@
  *
  * Base class for debug panels.
  *
- * Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * PHP 5
+ *
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org
- * @package       debug_kit
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
  * @since         DebugKit 0.1
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+
+/**
+ * Class DebugPanel
+ *
+ * @since         DebugKit 0.1
  */
 class DebugPanel {
 
@@ -47,13 +55,16 @@ class DebugPanel {
 	public $javascript = array();
 
 /**
- * Provide a custom element name for this panel.  If null, the underscored version of the class
+ * Provide a custom element name for this panel. If null, the underscored version of the class
  * name will be used.
  *
  * @var string
  */
 	public $elementName = null;
 
+/**
+ * Empty constructor
+ */
 	public function __construct() {
 	}
 
@@ -62,7 +73,7 @@ class DebugPanel {
  *
  * Pull information from the controller / request
  *
- * @param object $controller Controller reference.
+ * @param \Controller|object $controller Controller reference.
  * @return void
  */
 	public function startup(Controller $controller) {
@@ -71,10 +82,9 @@ class DebugPanel {
 /**
  * Prepare output vars before Controller Rendering.
  *
- * @param object $controller Controller reference.
+ * @param \Controller|object $controller Controller reference.
  * @return void
  */
 	public function beforeRender(Controller $controller) {
 	}
-
 }
